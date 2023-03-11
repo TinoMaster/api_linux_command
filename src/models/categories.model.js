@@ -7,6 +7,7 @@ const CategoriesSchema = new Schema({
 });
 
 const CategoryModel = mongoose.model("Category", CategoriesSchema);
+
 mongoose.connect(`${db_config.mongo_host}/${db_config.mongo_db}`);
 
 module.exports = CategoryModel;
