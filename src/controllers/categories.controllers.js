@@ -19,16 +19,30 @@ CategoryController.get_all = async (req, res) => {
 
 CategoryController.save = async (req, res) => {
   const data = req.body;
+  console.log(req.body);
   try {
     const resp = await CategoryModel.create(data);
-    res
-      .status(201)
-      .json({ success: true, message: "Dato introducido satisfactoriamente" });
+    res.status(201).json({
+      success: true,
+      message: "Dato introducido satisfactoriamente",
+      data: resp,
+    });
   } catch (error) {
     console.log(error);
     res
       .status(500)
       .json({ error: true, message: "Error al introducir el dato" });
+  }
+};
+
+CategoryController.delete = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const resp = await CategoryModel.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: "Categoria eliminada" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: true, message: "Error inesperado" });
   }
 };
 
